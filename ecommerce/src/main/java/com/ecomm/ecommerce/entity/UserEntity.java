@@ -3,6 +3,10 @@ package com.ecomm.ecommerce.entity;
 import com.ecomm.ecommerce.dto.UserRoles;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -27,5 +31,15 @@ public class UserEntity {
 
     @Column(name = "user_role", nullable = false)
     private UserRoles roles = UserRoles.CUSTOMER;
+
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    private AddressEntity address;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 
 }
