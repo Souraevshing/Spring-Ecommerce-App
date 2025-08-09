@@ -1,6 +1,6 @@
 package com.ecomm.ecommerce.dto;
 
-import com.ecomm.ecommerce.validation.ValidUser;
+import com.ecomm.ecommerce.validation.ValidUserRole;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -29,7 +29,7 @@ public class UserDto {
     private String phoneNo;
 
     @NotBlank(message = "User role must be admin or customer")
-    @ValidUser(message = "User role must be ADMIN or CUSTOMER")
+    @ValidUserRole(message = "User role must be ADMIN or CUSTOMER")
     private UserRoles roles = UserRoles.CUSTOMER;
 
 }

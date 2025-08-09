@@ -4,10 +4,10 @@ import com.ecomm.ecommerce.dto.UserRoles;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-public class UserRoleValidator implements ConstraintValidator<ValidUser, UserRoles> {
+public class UserRoleValidator implements ConstraintValidator<ValidUserRole, UserRoles> {
 
     @Override
-    public void initialize(ValidUser constraintAnnotation) {
+    public void initialize(ValidUserRole constraintAnnotation) {
         ConstraintValidator.super.initialize(constraintAnnotation);
     }
 
