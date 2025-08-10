@@ -10,5 +10,6 @@ public interface UserService {
     public UserDto getUserById(Long id);
     public UserDto createUser(UserDto user);
     public UserDto updateUserById(Long id, UserDto user);
+    public String deleteUserById(Long id);
 
 }

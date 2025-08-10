@@ -41,7 +41,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto createUser(UserDto user) {
         user.setId(null);
-        UserEntity savedUser = userRepository.save(userMapper.convertToJpa(user));
+        UserEntity newUser = userMapper.convertToJpa(user);
+        UserEntity savedUser = userRepository.save(newUser);
         return userMapper.convertToDto(savedUser);
     }
 
@@ -51,6 +52,12 @@ public class UserServiceImpl implements UserService {
                         .orElseThrow(() -> new EntityNotFoundException("User does not exist"));
         userMapper.updateEntityFromDto(user, savedUser);
         return userMapper.convertToDto(savedUser);
+    }
+
+    @Override
+    public String deleteUserById(Long id) {
+        userRepository.deleteById(id);
+        return "Deleted";
     }
 
 }
