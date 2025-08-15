@@ -32,10 +32,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto getUserById(Long id) {
-        UserEntity userEntity = userRepository
+        UserEntity existingUser = userRepository
                 .findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("User does not exist"));
-        return userMapper.convertToDto(userEntity);
+        return userMapper.convertToDto(existingUser);
     }
 
     @Override

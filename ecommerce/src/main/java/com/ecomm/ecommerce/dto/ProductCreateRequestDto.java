@@ -1,17 +1,12 @@
 package com.ecomm.ecommerce.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.*;
 import lombok.Data;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 @Data
-public class ProductDto {
+public class ProductCreateRequestDto {
 
     @NotBlank(message = "Product name is required")
     @Size(max = 50, message = "Product name must be most 50 characters")
@@ -38,16 +33,4 @@ public class ProductDto {
     @NotBlank(message = "Image URL is required")
     @Size(max = 300, message = "Image URL must be at most 300 characters")
     private String imageUrl;
-
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private final Boolean active;
-
-    @CreationTimestamp
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    private LocalDateTime createdAt;
-
-    @UpdateTimestamp
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    private LocalDateTime updatedAt;
-
 }
