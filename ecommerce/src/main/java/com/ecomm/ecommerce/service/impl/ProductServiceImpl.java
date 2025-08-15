@@ -11,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -65,6 +64,14 @@ public class ProductServiceImpl implements ProductService {
                 .orElseThrow(() -> new EntityNotFoundException("Product does not exist"));
         existingProduct.setActive(false);
         return "Deleted";
+    }
+
+    @Override
+    public List<ProductDto> searchProducts(String searchQuery) {
+        return productRepository.searchProducts(searchQuery)
+                .stream()
+                .map(productMapper::convertToDto)
+                .collect(Collectors.toList());
     }
 
 }

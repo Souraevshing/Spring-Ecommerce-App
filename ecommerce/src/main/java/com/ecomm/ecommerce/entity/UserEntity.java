@@ -9,7 +9,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.time.LocalDateTime;
 
 @Data
-@Entity
+@Entity(name = "user_tab")
 @Table(name = "user_tab")
 public class UserEntity {
 
