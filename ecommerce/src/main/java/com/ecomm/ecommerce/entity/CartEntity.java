@@ -10,33 +10,27 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(name = "product_tab")
-public class ProductEntity {
+@Table(name = "cart_tab")
+public class CartEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "cart_id", nullable = false)
+    private Long cartId;
 
-    @Column(name = "name", nullable = false, length = 20)
-    private String name;
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private UserEntity user;
 
-    @Column(name = "description", nullable = false, length = 250)
-    private String description;
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id", nullable = false)
+    private ProductEntity product;
+
+    @Column(name = "quantity", nullable = false)
+    private Integer quantity;
 
     @Column(name = "price", nullable = false, precision = 10, scale = 2)
     private BigDecimal price;
-
-    @Column(name = "stock_quantity", nullable = false)
-    private Integer stockQuantity;
-
-    @Column(name = "category", nullable = false, length = 20)
-    private String category;
-
-    @Column(name = "image_url", nullable = false, length = 300)
-    private String imageUrl;
-
-    @Column(name = "active", nullable = false)
-    private Boolean active = true;
 
     @CreationTimestamp
     @Column(name = "created_at", updatable = false, nullable = false)

@@ -8,6 +8,8 @@ import java.math.BigDecimal;
 @Data
 public class ProductCreateRequestDto {
 
+    private Long id;
+
     @NotBlank(message = "Product name is required")
     @Size(max = 50, message = "Product name must be most 50 characters")
     private String name;
@@ -33,4 +35,5 @@ public class ProductCreateRequestDto {
     @NotBlank(message = "Image URL is required")
     @Size(max = 300, message = "Image URL must be at most 300 characters")
     private String imageUrl;
+
 }

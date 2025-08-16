@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
@@ -25,8 +24,8 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductDto createProduct(ProductCreateRequestDto productCreateRequestDto) {
         ProductEntity newProduct = productMapper.convertToCreateProductJpa(productCreateRequestDto);
-        productRepository.save(newProduct);
-        return productMapper.convertToDto(newProduct);
+        ProductEntity savedProduct = productRepository.save(newProduct);
+        return productMapper.convertToDto(savedProduct);
     }
 
     @Override
@@ -50,6 +49,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public ProductDto getProductById(Long id) {
         ProductEntity existingProduct = productRepository
                 .findById(id)

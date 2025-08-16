@@ -13,6 +13,8 @@ import java.time.LocalDateTime;
 @Data
 public class ProductDto {
 
+    private Long id;
+
     @NotBlank(message = "Product name is required")
     @Size(max = 50, message = "Product name must be most 50 characters")
     private String name;
@@ -40,7 +42,7 @@ public class ProductDto {
     private String imageUrl;
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private final Boolean active;
+    private Boolean active;
 
     @CreationTimestamp
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
