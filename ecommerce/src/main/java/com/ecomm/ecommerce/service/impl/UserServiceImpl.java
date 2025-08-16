@@ -12,9 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@RequiredArgsConstructor
-@Transactional
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
@@ -31,6 +30,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public UserDto getUserById(Long id) {
         UserEntity existingUser = userRepository
                 .findById(id)
@@ -56,6 +56,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String deleteUserById(Long id) {
+        userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("User does not exist"));
         userRepository.deleteById(id);
         return "Deleted";
     }
