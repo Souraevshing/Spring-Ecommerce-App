@@ -19,8 +19,8 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 
-    @Transactional(readOnly = true)
     @Override
+    @Transactional(readOnly = true)
     public List<UserDto> getAllUsers() {
         return userRepository
                 .findAll()
@@ -47,6 +47,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public UserDto updateUserById(Long id, UserDto user) {
         UserEntity savedUser = userRepository.findById(id)
                         .orElseThrow(() -> new EntityNotFoundException("User does not exist"));
@@ -55,6 +56,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public String deleteUserById(Long id) {
         userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("User does not exist"));
         userRepository.deleteById(id);

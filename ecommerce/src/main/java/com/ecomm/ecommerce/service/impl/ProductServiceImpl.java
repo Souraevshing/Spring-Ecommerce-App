@@ -58,6 +58,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public String deleteProductById(Long id) {
         ProductEntity existingProduct = productRepository
                 .findById(id)
@@ -67,6 +68,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<ProductDto> searchProducts(String searchQuery) {
         return productRepository.searchProducts(searchQuery)
                 .stream()

@@ -1,11 +1,13 @@
 package com.ecomm.ecommerce.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
 @Entity
 @Table(name = "address_tab")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class AddressEntity {
 
     @Id

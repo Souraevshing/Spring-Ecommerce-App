@@ -1,5 +1,6 @@
 package com.ecomm.ecommerce.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @Table(name = "cart_tab")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class CartEntity {
 
     @Id

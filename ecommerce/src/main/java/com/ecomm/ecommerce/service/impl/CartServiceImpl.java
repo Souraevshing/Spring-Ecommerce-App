@@ -10,8 +10,10 @@ import com.ecomm.ecommerce.repository.UserRepository;
 import com.ecomm.ecommerce.service.CartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -57,6 +59,38 @@ public class CartServiceImpl implements CartService {
         }
 
         return true;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public String removeFromCart(String userId, Long productId) {
+        Optional<ProductEntity> productOpt = productRepository.findById(productId);
+        if (productOpt.isEmpty()) {
+            return "No products found";
+        }
+
+        Optional<UserEntity> userOpt = userRepository.findById(Long.valueOf(userId));
+        if (userOpt.isEmpty()) {
+            return "No users found";
+        }
+
+        // Use flatMap and return directly
+        return userOpt.flatMap(user ->
+                productOpt.map(product -> {
+                    cartRepository.deleteByUserAndProduct(user, product);
+                    return "Products deleted from cart";
+                })
+        ).orElse("Products not deleted from the cart");
+    }
+
+    @Override
+    public List<CartEntity> getCartItems(String userId) {
+        UserEntity user = userRepository.findById(Long.valueOf(userId))
+                .orElse(null);
+        if (user == null) {
+            return List.of();
+        }
+        return cartRepository.findByUser(user);
     }
 
 }
