@@ -3,13 +3,17 @@ package com.ecomm.ecommerce.entity;
 import com.ecomm.ecommerce.dto.UserRoles;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "user_tab")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})

@@ -25,6 +25,7 @@ public class CartServiceImpl implements CartService {
     private final CartRepository cartRepository;
 
     @Override
+    @Transactional
     public Boolean addToCart(String userId, CartDto cartDto) {
         Optional<ProductEntity> products = productRepository.findById(cartDto.getProductId());
         if (products.isEmpty()) {
@@ -62,7 +63,7 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public String removeFromCart(String userId, Long productId) {
         Optional<ProductEntity> productOpt = productRepository.findById(productId);
         if (productOpt.isEmpty()) {
@@ -83,6 +84,7 @@ public class CartServiceImpl implements CartService {
         ).orElse("Products not deleted from the cart");
     }
 
+    @Transactional
     @Override
     public List<CartEntity> getCartItems(String userId) {
         UserEntity user = userRepository.findById(Long.valueOf(userId))
@@ -91,6 +93,13 @@ public class CartServiceImpl implements CartService {
             return List.of();
         }
         return cartRepository.findByUser(user);
+    }
+
+    @Transactional
+    @Override
+    public void clearCart(String userId) {
+        userRepository.findById(Long.valueOf(userId))
+                .ifPresent(cartRepository::deleteByUser);
     }
 
 }

@@ -22,6 +22,7 @@ public class ProductServiceImpl implements ProductService {
     private final ProductMapper productMapper;
 
     @Override
+    @Transactional
     public ProductDto createProduct(ProductCreateRequestDto productCreateRequestDto) {
         ProductEntity newProduct = productMapper.convertToCreateProductJpa(productCreateRequestDto);
         ProductEntity savedProduct = productRepository.save(newProduct);
