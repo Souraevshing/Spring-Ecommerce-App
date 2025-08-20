@@ -1,5 +1,6 @@
 server:
   port: 8000
+  shutdown: graceful
 
 spring:
   application:
@@ -9,6 +10,10 @@ spring:
     username: postgres
     password: admin
     driver-class-name: org.postgresql.Driver
+    hikari:
+      initialization-fail-timeout: 0
+      minimum-idle: 1
+      maximum-pool-size: 5
 
   jpa:
     hibernate:
@@ -16,5 +21,25 @@ spring:
     show-sql: true
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+  endpoint:
+    health:
+      show-details: always
+    shutdown:
+      enabled: true
+  info:
+    env:
+      enabled: true
+
+info:
+  app:
+    name: Ecommerce-App
+    description: Ecommerce Api for performing CRUD operations
+    version: 0.1.0
