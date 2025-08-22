@@ -1,0 +1,45 @@
+server:
+  port: 8001
+  shutdown: graceful
+
+spring:
+  application:
+    name: ecommerce
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ecomm_db
+    username: postgres
+    password: admin
+    hikari:
+      initialization-fail-timeout: 0
+      minimum-idle: 1
+      maximum-pool-size: 5
+
+  jpa:
+    database: POSTGRESQL
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+  endpoint:
+    health:
+      show-details: always
+    shutdown:
+      enabled: true
+  info:
+    env:
+      enabled: true
+
+info:
+  app:
+    name: Ecommerce-App
+    description: Ecommerce Api for performing CRUD operations
+    version: 0.1.0
