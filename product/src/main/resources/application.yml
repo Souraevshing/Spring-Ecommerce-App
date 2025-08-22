@@ -1,5 +1,5 @@
 server:
-  port: 8001
+  port: 8002
   shutdown: graceful
 
 spring:
@@ -40,6 +40,6 @@ management:
 
 info:
   app:
-    name: User microservice for ecommerce app
-    description: User microservice for ecommerce app for performing CRUD operations
+    name: Product microservice for ecommerce app
+    description: Product microservice for ecommerce app for performing CRUD operations
     version: 0.2.0
